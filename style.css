@@ -1,53 +1,67 @@
-body { background-color: #0a0a0a; color: white; font-family: 'Orbitron', sans-serif; margin: 0; overflow: hidden; }
+/* --- Global --- */
+body { background-color: #0a0a0a; color: white; font-family: 'Orbitron', sans-serif; margin: 0; overflow: hidden; user-select: none; }
+button { font-family: 'Orbitron', sans-serif; }
 
 /* --- Top Navigation --- */
-.top-nav {
-    height: 60px; background: #111; border-bottom: 2px solid #00e5ff;
-    display: flex; justify-content: space-between; align-items: center; padding: 0 30px;
-}
+.top-nav { height: 60px; background: #111; border-bottom: 2px solid #00e5ff; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; }
 .nav-logo { color: #00e5ff; font-weight: bold; letter-spacing: 2px; }
 .year { font-size: 0.7rem; vertical-align: top; color: #555; }
-.auth-btn {
-    background: transparent; border: 1px solid #00e5ff; color: #00e5ff;
-    padding: 8px 15px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s;
-}
+.auth-btn { background: transparent; border: 1px solid #00e5ff; color: #00e5ff; padding: 8px 15px; cursor: pointer; font-size: 0.8rem; transition: 0.3s; }
 .auth-btn:hover { background: #00e5ff; color: #000; }
 #user-display { color: #555; font-size: 0.8rem; margin-right: 15px; }
 
 /* --- Main Layout --- */
 .arcade-wrapper { display: flex; height: calc(100vh - 60px); }
-.sidebar { width: 250px; background: #0a0a0a; padding: 20px; border-right: 1px solid #222; }
-.nav-btn {
-    width: 100%; padding: 15px; margin-bottom: 10px; background: #111; border: 1px solid #333;
-    color: #888; cursor: pointer; font-family: 'Orbitron'; transition: 0.3s;
-}
-.nav-btn.active { color: #00e5ff; border-color: #00e5ff; }
+.sidebar { width: 250px; background: #0a0a0a; padding: 20px; border-right: 1px solid #222; display: flex; flex-direction: column; }
+.nav-btn { width: 100%; padding: 15px; margin-bottom: 10px; background: #111; border: 1px solid #333; color: #888; cursor: pointer; transition: 0.3s; text-align: left; }
+.nav-btn.active { color: #00e5ff; border-color: #00e5ff; box-shadow: 0 0 10px rgba(0, 229, 255, 0.1); }
+.nav-btn:hover { background: #151515; }
 
-/* --- Auth Overlay --- */
-.login-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); z-index: 1000; display: flex; justify-content: center; align-items: center;
-}
-.login-box {
-    background: #111; padding: 40px; border: 1px solid #00e5ff; width: 350px; text-align: center; position: relative;
-}
-.close-overlay { position: absolute; top: 10px; right: 10px; background: none; border: none; color: #555; font-size: 1.5rem; cursor: pointer; }
-.login-box input { width: 100%; padding: 12px; margin-bottom: 15px; background: #000; border: 1px solid #333; color: #00e5ff; font-family: 'Orbitron'; }
-.main-auth { width: 100%; padding: 15px; background: #00e5ff; color: #000; border: none; cursor: pointer; font-family: 'Orbitron'; font-weight: bold; }
-.register-btn { background: #ff0055; color: white; }
-
-/* --- Games --- */
+/* --- Game Views --- */
 .content { flex: 1; padding: 40px; display: flex; flex-direction: column; align-items: center; position: relative; }
 .game-view { display: none; width: 100%; max-width: 600px; text-align: center; }
 .game-view.active { display: block; }
-.game-screen { height: 300px; border-radius: 20px; border: 4px solid #222; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.game-header { margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 15px; }
+.stats-bar { color: #00e5ff; font-size: 1.1rem; margin: 10px 0; }
+.game-start-btn { background: transparent; color: #00e5ff; border: 1px solid #00e5ff; padding: 10px 20px; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+.game-start-btn:hover:not(:disabled) { background: #00e5ff; color: #000; box-shadow: 0 0 15px #00e5ff; }
+.game-start-btn:disabled { border-color: #444; color: #444; cursor: not-allowed; }
+
+/* --- Reaction Game --- */
+.game-screen { height: 300px; border-radius: 20px; border: 4px solid #222; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background 0.2s; }
 .waiting { background: #1a2a44; }
 .ready { background: #6e1015; }
-.go { background: #008037; }
-.aim-area { height: 400px; background: #0f0f0f; position: relative; border: 1px solid #222; }
-.target { width: 35px; height: 35px; background: #00e5ff; border-radius: 50%; position: absolute; cursor: pointer; }
-.big-button { font-size: 5rem; background: none; border: none; cursor: pointer; }
-.game-start-btn { background: transparent; color: #00e5ff; border: 1px solid #00e5ff; padding: 10px 20px; cursor: pointer; font-family: 'Orbitron'; margin-top: 10px;}
+.go { background: #008037; box-shadow: 0 0 30px #008037; }
 
-.hidden { display: none; }
-.history-section { margin-top: 50px; text-align: left; opacity: 0.5; font-size: 0.8rem; }
+/* --- Aim Trainer --- */
+.aim-area { height: 400px; background: #0f0f0f; position: relative; border: 1px solid #222; cursor: crosshair !important; overflow: hidden; }
+.target { width: 40px; height: 40px; background: #00e5ff; border-radius: 50%; position: absolute; cursor: crosshair; box-shadow: 0 0 15px #00e5ff; transition: transform 0.1s; }
+.target:active { transform: scale(0.9); }
+
+/* --- Clicker --- */
+.clicker-stage { margin-top: 20px; }
+.big-button { font-size: 5rem; background: none; border: none; cursor: pointer; transition: transform 0.05s; }
+.big-button:active { transform: scale(0.9); }
+
+/* --- Results Popup --- */
+.results-popup { width: 100%; max-width: 500px; margin-top: 20px; background: #111; border: 2px solid #00e5ff; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 30px rgba(0, 229, 255, 0.2); position: relative; z-index: 100; animation: popUp 0.3s ease-out; }
+@keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.results-grid { display: flex; justify-content: space-around; margin: 20px 0; border-top: 1px solid #333; border-bottom: 1px solid #333; padding: 15px 0;}
+.res-label { display: block; color: #555; font-size: 0.7rem; }
+.res-value { display: block; color: #fff; font-size: 2rem; font-weight: bold; }
+
+/* --- Auth & Utility --- */
+.hidden { display: none !important; }
+.login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; display: flex; justify-content: center; align-items: center; }
+.login-box { background: #111; padding: 40px; border: 1px solid #00e5ff; width: 350px; text-align: center; position: relative; }
+.close-overlay { position: absolute; top: 10px; right: 10px; background: none; border: none; color: #555; font-size: 1.5rem; cursor: pointer; }
+.login-box input { width: 100%; padding: 12px; margin-bottom: 15px; background: #000; border: 1px solid #333; color: #00e5ff; font-family: 'Orbitron'; box-sizing: border-box; }
+.main-auth { width: 100%; padding: 15px; background: #00e5ff; color: #000; border: none; cursor: pointer; font-family: 'Orbitron'; font-weight: bold; }
+.register-btn { background: #ff0055; color: white; }
+.toggle-link { margin-top: 20px; font-size: 0.7rem; color: #555; }
+.toggle-link span { color: #00e5ff; cursor: pointer; text-decoration: underline; }
+
+/* --- Logs --- */
+.history-section { margin-top: auto; text-align: left; opacity: 0.6; font-size: 0.8rem; border-top: 1px solid #222; padding-top: 10px;}
+#historyList { list-style: none; padding: 0; margin: 0; color: #888; font-family: monospace; }
+#historyList li { border-bottom: 1px solid #222; padding: 4px 0; }
